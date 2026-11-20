@@ -119,7 +119,7 @@ This project was completed for educational and academic purposes in a controlled
 
 ## 👨‍💻 Author
 
-**Sohel Rana**  
+**MD. SOHEL RANA**  
 GitHub: [@sohelrana53](https://github.com)
 
 ---
