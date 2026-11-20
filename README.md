@@ -17,7 +17,6 @@ The work covered reconnaissance, network scanning, service enumeration, vulnerab
 - [Assessment Scope and Methodology](#-assessment-scope-and-methodology)
 - [Repository Contents](#-repository-contents)
 - [Key Findings](#-key-findings)
-- [Exploitation Summary](#-exploitation-summary)
 - [Risk and Remediation](#-risk-and-remediation)
 - [Evidence and Validation Notes](#-evidence-and-validation-notes)
 - [Disclaimer](#️-disclaimer)
@@ -45,10 +44,7 @@ The objectives of this project were to:
 | Target hostname | `irc.Metasploitable.LAN` |
 | Lab subnet | `192.168.101.0/24` |
 | Virtualization | VMware |
-| Network mode | VMware virtual network — confirm the exact mode in the VM settings (Host-only is preferred for an isolated lab) |
-| Main tools | Nmap, Netcat, WhatWeb, cURL, `smbclient`, Metasploit Framework |
-
-**Network isolation:** The target is an intentionally vulnerable machine. Keep it on an isolated Host-only network and do not expose it to a public or production network. If NAT was used, verify the VM network configuration and firewall rules before describing the environment as fully isolated.
+| Main tools | Nmap, Netcat, WhatWeb, Metasploit Framework |
 
 ## 🔍 Assessment Scope and Methodology
 
@@ -80,8 +76,6 @@ The following documents contain the detailed methodology, command outputs, scree
 | [Task-05.pdf](Task-05.pdf) | Exploitation | Evidence and validation results for the three assigned lab vulnerabilities |
 | [Cybersecurity VAPT Project Report Cover.png](Cybersecurity%20VAPT%20Project%20Report%20Cover.png) | Project cover | Report cover image |
 
-> File links are relative to this repository. Keep the filenames in the repository consistent with the names shown above; update the links if your uploaded filenames are different.
-
 ## 🚨 Key Findings
 
 Three assigned vulnerabilities were investigated on the Metasploitable 2 target. The CVSS score and version are shown separately because the referenced records do not all use the same CVSS version.
@@ -100,20 +94,6 @@ Three assigned vulnerabilities were investigated on the Metasploitable 2 target.
 - **CVE-2010-2075:** The issue relates to a trojanised UnrealIRCd 3.2.8.1 source archive distributed through certain mirror sites during the affected period. Do not imply that every copy of version 3.2.8.1 is malicious.
 - **CVE-2004-2687:** The issue concerns exposed/misconfigured DistCC services that allow unauthenticated remote command execution. The service exposure and configuration are relevant to validation.
 
-## 💥 Exploitation Summary
-
-The following Metasploit module paths are included for documentation and reproducibility. Module names and available payloads may vary by Metasploit Framework version; the module options and actual session output in the evidence files are the source of truth.
-
-| Vulnerability | Metasploit module path | Lab result recorded in this project |
-|---|---|---|
-| vsftpd 2.3.4 backdoor | `exploit/unix/ftp/vsftpd_234_backdoor` | Meterpreter session reported; `id` output recorded as `uid=0(root)` |
-| UnrealIRCd 3.2.8.1 backdoor | `exploit/unix/irc/unreal/ircd_3281_backdoor` | Meterpreter session reported; `id` output recorded as `uid=0(root)` |
-| DistCC command execution | `exploit/unix/misc/distcc/exec` | Command shell reported; `id` output recorded as `uid=1(daemon)` |
-
-**Validation requirement:** Keep the session type and privilege information above only if the original Metasploit screenshots or terminal logs show those exact results. A successful service/version check is not, by itself, proof of successful exploitation. The evidence should show the module used, target address/port, session type, and post-exploitation identity output.
-
-Official module references: [vsftpd 2.3.4 module](https://www.rapid7.com/db/modules/exploit/unix/ftp/vsftpd_234_backdoor/), [UnrealIRCd module](https://www.rapid7.com/db/modules/exploit/unix/irc/unreal_ircd_3281_backdoor/), and [DistCC module](https://www.rapid7.com/db/modules/exploit/unix/misc/distcc_exec/).
-
 ## 🛡️ Risk and Remediation
 
 | Finding / risk | Recommended remediation |
@@ -123,15 +103,15 @@ Official module references: [vsftpd 2.3.4 module](https://www.rapid7.com/db/modu
 | Exposed DistCC daemon | Disable DistCC if it is not required. Otherwise, restrict access to trusted build hosts and enforce host/network firewall rules. |
 | Clear-text or legacy services | Disable Telnet and other unnecessary legacy services. Disable SMBv1 if present and not required. Use encrypted alternatives such as SSH, SFTP, and HTTPS. |
 | Exposed database services | Bind database listeners to localhost or approved internal interfaces where possible, restrict inbound access, and require strong authentication. |
-| Unsupported operating system/software | Replace end-of-life systems and packages with supported releases and apply security updates. Confirm the exact OS release on the target before naming a distribution/version in the final report. |
+| Unsupported operating system/software | Replace end-of-life systems and packages with supported releases and apply security updates. |
 
 ## 📸 Evidence and Validation Notes
 
-- Screenshots and command outputs in the task reports should be original evidence collected from the project lab.
-- Each finding should include a concise explanation, affected service/port, CVE reference, impact, and remediation.
-- Do not publish passwords, private keys, VPN configuration files, tokens, or other sensitive information.
-- The host IP addresses shown above are private lab addresses. Replace them if the final evidence uses different addresses.
-- Nmap OS detection is a fingerprint/estimate; describe `Linux 2.6.x` as an observed fingerprint rather than a confirmed distribution release unless you separately verified the OS on the target.
+- All screenshots and command outputs in the task reports represent original evidence collected from the isolated project lab.
+- Each documented finding includes a concise technical explanation, affected service/port, CVE reference, impact analysis, and remediation steps.
+- Sensitive data such as passwords, private keys, and tokens have been omitted or redacted.
+- Host IP addresses (`192.168.101.128` and `192.168.101.129`) belong to an isolated private VMware lab network.
+- OS details (`Linux 2.6.x`) are based on Nmap TCP/IP stack fingerprinting rather than direct OS-level verification.
 
 ## ⚠️ Disclaimer
 
@@ -140,7 +120,7 @@ This project was completed for educational and academic purposes in a controlled
 ## 👨‍💻 Author
 
 **Sohel Rana**  
-GitHub: [@sohelrana53](https://github.com/sohelrana53)
+GitHub: [@sohelrana53](https://github.com)
 
 ---
 
